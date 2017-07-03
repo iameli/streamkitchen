@@ -6,7 +6,8 @@ mac:
 win:
   publisherName: Eli Mallon
 directories:
-  output: apps
+  output: built-apps
+  buildResources: build
 publish:
   provider: s3
   bucket: crap.stream.place
