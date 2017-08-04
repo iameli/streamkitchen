@@ -14,10 +14,6 @@
   },
   "build": {
     "appId": "place.stream",
-    "directories": {
-      "buildResources": "build",
-      "output": "built-apps"
-    },
     "mac": {
       "category": "public.app-category.video"
     },
