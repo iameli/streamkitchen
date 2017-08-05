@@ -16,6 +16,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
   security import /tmp/certificate.p12 -P "" -k build.keychain -T /usr/bin/codesign
   security find-identity -v
 else
-  apt-get install -y wine
+  sudo apt-get install -y wine
 fi
 node "$ROOT/run/ci-build-app.js"
