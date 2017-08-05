@@ -15,5 +15,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   security unlock-keychain -p mysecretpassword build.keychain
   security import /tmp/certificate.p12 -P "" -k build.keychain -T /usr/bin/codesign
   security find-identity -v
+else
+  apt-get install -y wine
 fi
 node "$ROOT/run/ci-build-app.js"
