@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run prepublish && npm run electron-builder-local",
     "electron-builder-local": "ELECTRON_CHANNEL=\"${ELECTRON_CHANNEL:-dev}\" electron-builder --publish never",
-    "electron-publish": "electron-builder -mw --publish always"
+    "electron-publish": "electron-builder -w --publish always"
   },
   "build": {
     "appId": "place.stream",
