@@ -1,13 +1,12 @@
 os:
 - osx
+- linux
 branches:
   except:
   - /^v[0-9]/
 language: node_js
 node_js:
 - '6'
-before_install:
-- brew install wine
 script:
 - npm run ci-build-app
 notifications:
