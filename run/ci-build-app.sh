@@ -6,6 +6,7 @@ set -o pipefail
 
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
+npm install -g npm
 echo $CERTIFICATE_OSX_P12 | base64 --decode > /tmp/certificate.p12
 ls -alhs /tmp/certificate.p12
 security create-keychain -p mysecretpassword build.keychain
