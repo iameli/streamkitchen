@@ -24,5 +24,6 @@ else
   sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
   sudo apt-get update
   sudo apt-get install -y wine-stable
+  sudo ln -s /opt/wine-stable/bin/wine /usr/bin/wine
 fi
 node "$ROOT/run/ci-build-app.js"
