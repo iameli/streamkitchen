@@ -6,7 +6,6 @@ set -o pipefail
 
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-npm install -g npm
 if [[ "$(uname)" == "Darwin" ]]; then
   echo $CERTIFICATE_OSX_P12 | base64 --decode > /tmp/certificate.p12
   ls -alhs /tmp/certificate.p12
@@ -15,15 +14,18 @@ if [[ "$(uname)" == "Darwin" ]]; then
   security unlock-keychain -p mysecretpassword build.keychain
   security import /tmp/certificate.p12 -P "" -k build.keychain -T /usr/bin/codesign
   security find-identity -v
+  node "$ROOT/run/ci-build-app.js"
 else
-  sudo dpkg --add-architecture i386
-  sudo apt-get update
-  sudo apt-get install -y --force-yes software-properties-common python-software-properties curl apt-transport-https libstdc++6 build-essential
-  curl -LO https://dl.winehq.org/wine-builds/Release.key
-  sudo apt-key add Release.key
-  sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
-  sudo apt-get update
-  sudo apt-get install -y wine-stable
-  sudo ln -s /opt/wine-stable/bin/wine /usr/bin/wine
+  docker run \
+    --rm \
+    -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
+    -e AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
+    -e AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION" \
+    -e WIN_CSC_LINK="$WIN_CSC_LINK" \
+    -e WIN_CSC_KEY_PASSWORD="$WIN_CSC_KEY_PASSWORD" \
+    -v "$ROOT:/streamplace" \
+    -w /streamplace \
+    electronuserland/electron-builder:wine \
+    node /streamplace/run/ci-build-app.js
 fi
-node "$ROOT/run/ci-build-app.js"
+
