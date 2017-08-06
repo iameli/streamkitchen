@@ -18,7 +18,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
   sudo dpkg --add-architecture i386
   sudo apt-get update
-  sudo apt-get install -y --force-yes software-properties-common python-software-properties curl apt-transport-https
+  sudo apt-get install -y --force-yes software-properties-common python-software-properties curl apt-transport-https libstdc++6
   curl -LO https://dl.winehq.org/wine-builds/Release.key
   sudo apt-key add Release.key
   sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
