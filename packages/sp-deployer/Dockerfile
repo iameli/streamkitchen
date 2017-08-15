@@ -1,5 +1,5 @@
 
-FROM streamplace/sp-node
+FROM quay.io/streamplace/sp-node
 
 RUN npm install -g --unsafe-perm helm-cli \
   && npm install -g --unsafe-perm kubectl-cli \
