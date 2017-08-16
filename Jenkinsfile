@@ -7,6 +7,7 @@ pipeline {
         WH_S3_ACCESS_KEY_ID = credentials('WH_S3_ACCESS_KEY_ID')
         WH_S3_SECRET_ACCESS_KEY = credentials('WH_S3_SECRET_ACCESS_KEY')
         WH_S3_URL = credentials('WH_S3_URL')
+        NPM_CONFIG_UNSAFE_PERM = 'true'
     }
 
     stages {
