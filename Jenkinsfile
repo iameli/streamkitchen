@@ -11,10 +11,17 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Install') {
             steps {
                 ansiColor('xterm') {
                     sh 'npm install'
+                    sh 'npx wheelhouse install'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                ansiColor('xterm') {
                     sh 'npx wheelhouse build'
                 }
             }
