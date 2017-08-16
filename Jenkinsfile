@@ -9,18 +9,18 @@ pipeline {
         WH_S3_URL = credentials('WH_S3_URL')
     }
 
-    ansiColor('xterm') {
-        stages {
-            stage('Build') {
-                steps {
+    stages {
+        stage('Build') {
+            steps {
+                ansiColor('xterm') {
                     sh 'npm install'
                     sh 'npx wheelhouse build'
                 }
             }
-            stage('Push') {
-                steps {
-                    sh 'npx wheelhouse push'
-                }
+        }
+        stage('Push') {
+            steps {
+                sh 'npx wheelhouse push'
             }
         }
     }
