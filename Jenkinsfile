@@ -17,7 +17,6 @@ pipeline {
                 ansiColor('xterm') {
                     sh 'npm install'
                     sh 'npx wheelhouse install'
-                    sh 'helm init --client-only'
                 }
             }
         }
@@ -29,8 +28,10 @@ pipeline {
             }
         }
         stage('Push') {
-            steps {
-                sh 'npx wheelhouse push'
+            ansiColor('xterm') {
+                steps {
+                    sh 'npx wheelhouse push'
+                }
             }
         }
     }
