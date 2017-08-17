@@ -48,6 +48,10 @@ export default class BroadcastScheduler {
       const podIds = [];
       pods.forEach(pod => {
         // Only delete once for each podId
+        if (!pod.metadata.annotations) {
+          winston.info(`${pod.name} has no annotations, that's weird`);
+          return;
+        }
         const podId = pod.metadata.annotations[BROADCAST_ID_ANNOTATION];
         if (podIds.includes(podId)) {
           return;
