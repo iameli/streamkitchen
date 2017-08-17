@@ -27,6 +27,10 @@ spec:
           emptyDir: {}
       {{- end }}
       containers:
+      {{- if .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.global.imagePullSecrets | indent 8 }}
+      {{- end }}
       - name: {{ .Chart.Name }}
         readinessProbe:
           httpGet:
