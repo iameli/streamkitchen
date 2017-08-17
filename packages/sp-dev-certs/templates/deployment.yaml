@@ -35,7 +35,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         {{- if .Values.global.development }}
-        image: "streamplace/{{ .Chart.Name }}:latest"
+        image: "{{ .Values.global.repo }}/{{ .Chart.Name }}:latest"
         command:
           - bash
           - -c
@@ -48,7 +48,7 @@ spec:
           - name: tmp
             mountPath: /tmp
         {{- else }}
-        image: "{{ .Values.global.repo }}/{{ .Chart.Name }}:v{{ .Chart.Version }}"
+        image: "{{ .Values.global.repo }}/{{ .Chart.Name }}:{{ .Chart.Version }}"
         {{- end }}
         imagePullPolicy: IfNotPresent
         ports:
