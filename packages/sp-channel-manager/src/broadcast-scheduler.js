@@ -75,7 +75,7 @@ export default class BroadcastScheduler {
         }
         data = data.items.filter(pod => {
           const annotations = pod.metadata.annotations;
-          return annotations[ROLE_ANNOTATION] === MY_ROLE;
+          return annotations && annotations[ROLE_ANNOTATION] === MY_ROLE;
         });
         resolve(data);
       });
@@ -122,7 +122,9 @@ export default class BroadcastScheduler {
     return this.getPods().then(pods => {
       const [currentPod, ...rest] = pods.filter(pod => {
         const annotations = pod.metadata.annotations;
-        return annotations[BROADCAST_ID_ANNOTATION] === broadcastId;
+        return (
+          annotations && annotations[BROADCAST_ID_ANNOTATION] === broadcastId
+        );
       });
       if (rest.length > 0) {
         winston.warn(
