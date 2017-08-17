@@ -26,11 +26,11 @@ spec:
         - name: tmp
           emptyDir: {}
       {{- end }}
-      containers:
       {{- if .Values.global.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.global.imagePullSecrets | indent 8 }}
       {{- end }}
+      containers:
       - name: {{ .Chart.Name }}
         readinessProbe:
           httpGet:

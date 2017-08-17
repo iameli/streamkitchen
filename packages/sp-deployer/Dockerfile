@@ -31,4 +31,4 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && npm install -g --unsafe-perm kubectl-cli helm-cli
 
 # needed shared lib for docker
-RUN apt-get update && apt-get install -y libltdl7
+RUN apt-get update && apt-get install -y libltdl7 jq
