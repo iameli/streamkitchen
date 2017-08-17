@@ -23,6 +23,7 @@ spec:
         args:
           - --default-backend-service
           - {{ .Release.Namespace }}/{{ .Release.Name }}-sp-default
+          - --tcp-services-configmap={{ .Release.Namespace }}/{{ template "fullname" . }}-tcp
           - --configmap={{ .Release.Namespace }}/{{ template "fullname" . }}
         env:
           - name: POD_NAME
