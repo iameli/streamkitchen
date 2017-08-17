@@ -90,6 +90,10 @@ spec:
             {{- end }}
           - name: SP_IMAGE_PULL_POLICY
             value: {{ if .Values.global.development }}Never{{ else }}Always{{ end }}
+          {{- if .Values.global.imagePullSecrets }}
+          - name: SP_IMAGE_PULL_SECRETS
+            value: {{ toJson .Values.global.imagePullSecrets | quote }}
+          {{- end }}
           {{- if .Values.global.development }}
           - name: SP_DEV_EXTERNAL_IP
             value: "{{ .Values.global.externalIP }}"

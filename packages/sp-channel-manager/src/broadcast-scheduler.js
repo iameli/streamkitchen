@@ -14,6 +14,11 @@ import config from "sp-configuration";
 const BROADCASTER_IMAGE = config.require("BROADCASTER_IMAGE");
 const IMAGE_PULL_POLICY = config.require("IMAGE_PULL_POLICY");
 const DEV_ROOT_DIRECTORY = config.optional("DEV_ROOT_DIRECTORY");
+const IMAGE_PULL_SECRETS = config.optional("IMAGE_PULL_SECRETS");
+let imagePullSecrets = [];
+if (IMAGE_PULL_SECRETS) {
+  imagePullSecrets = JSON.parse(IMAGE_PULL_SECRETS);
+}
 
 const ROLE_ANNOTATION = "stream.place/role";
 const MY_ROLE = "broadcaster";
@@ -146,6 +151,7 @@ export default class BroadcastScheduler {
         }
       },
       spec: {
+        imagePullSecrets: imagePullSecrets,
         containers: [
           {
             name: "broadcaster",
