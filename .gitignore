@@ -15,3 +15,4 @@ values-dev.yaml
 .tmp
 yarn-error.log
 .wheelhouse
+package-lock.json
