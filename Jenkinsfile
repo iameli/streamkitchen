@@ -28,8 +28,8 @@ pipeline {
             }
         }
         stage('Push') {
-            ansiColor('xterm') {
-                steps {
+            steps {
+                ansiColor('xterm') {
                     sh 'npx wheelhouse push'
                 }
             }
