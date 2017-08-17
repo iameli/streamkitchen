@@ -15,6 +15,7 @@ pipeline {
         stage('Install') {
             steps {
                 ansiColor('xterm') {
+                    sh 'git clean -fdx'
                     sh 'npm install'
                     sh 'npx wheelhouse install'
                 }
