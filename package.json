@@ -61,7 +61,6 @@
     "build-values-dev": "node run/build-values-dev.js",
     "docker-build": "run/every-package.sh run/package-docker-build.sh --concurrency=999",
     "docker-push": "run/every-package.sh run/package-docker-push.sh --concurrency=999",
-    "helm-build": "run/every-package.sh run/package-helm-build.sh --concurrency=1",
     "helm-lint": "run/every-package.sh run/helm-lint.sh --concurrency=999",
     "ci-build-app": "run/ci-build-app.sh",
     "helm-dev": "run/helm-dev.sh",
