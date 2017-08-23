@@ -18,7 +18,7 @@ export class Home extends Component {
     channels: React.PropTypes.array,
     ready: React.PropTypes.bool,
     SP: React.PropTypes.object,
-    broadcasts: React.PropTypes.object
+    broadcasts: React.PropTypes.array
   };
 
   static subscribe(props) {

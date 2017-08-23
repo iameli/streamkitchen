@@ -3,12 +3,16 @@ import { bindComponent, watch } from "sp-components";
 import CreateMyChannel from "./create-my-channel";
 import { FlexContainer } from "./shared.style";
 import { NoChannel, ChannelSelect } from "./home.style";
-import { TitleBar, ChannelName } from "./channel.style.js";
+import { TitleBar, ChannelName, GoLiveButton } from "./channel.style.js";
 import {
   Column,
   Stack,
   StackItem,
-  StackDragWrapper
+  StackDragWrapper,
+  StackTitle,
+  Output,
+  OutputTitle,
+  OutputButton
 } from "./broadcast-detail.style";
 import BroadcastStackItem from "./broadcast-stack-item";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -102,11 +106,43 @@ export class BroadcastDetail extends Component {
     return this.props.inputs.find(i => i.id === id);
   }
 
+  toggleOutput(output) {
+    const { broadcast } = this.props;
+    const newBroadcastId =
+      output.broadcastId === broadcast.id ? null : broadcast.id;
+    this.props.SP.outputs.update(output.id, {
+      broadcastId: newBroadcastId
+    });
+  }
+
+  goLive() {
+    const { SP, broadcast } = this.props;
+    SP.broadcasts.update(broadcast.id, { active: true });
+  }
+
+  stopLive() {
+    const { SP, broadcast } = this.props;
+    SP.broadcasts.update(broadcast.id, { active: false });
+  }
+
   render() {
     if (!this.state.broadcast || !this.props.inputs || !this.props.outputs) {
       return <p>Loading...</p>;
     }
-    const active = false;
+    const { broadcast } = this.state;
+    const active = broadcast.active;
+    let goLive;
+    if (active) {
+      goLive = (
+        <GoLiveButton active onClick={() => this.stopLive()}>
+          STOP
+        </GoLiveButton>
+      );
+    } else {
+      goLive = (
+        <GoLiveButton onClick={() => this.goLive()}>GO LIVE</GoLiveButton>
+      );
+    }
     return (
       <FlexContainer>
         <TitleBar active={active}>
@@ -116,12 +152,13 @@ export class BroadcastDetail extends Component {
             </ChannelName>
           </div>
           {active && <div>LIVE</div>}
+          {goLive}
         </TitleBar>
         <DragDropContext onDragEnd={e => this.dragEnd(e)}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) =>
               <Stack innerRef={provided.innerRef}>
-                <h4>Active Inputs</h4>
+                <StackTitle>ACTIVE</StackTitle>
                 {this.state.broadcast.sources.map(source =>
                   <Draggable key={source.id} draggableId={source.id}>
                     {(provided, snapshot) =>
@@ -146,13 +183,13 @@ export class BroadcastDetail extends Component {
                 >
                   {(provided, snapshot) =>
                     <div>
-                      <h4
-                        ref={provided.innerRef}
+                      <StackTitle
+                        innerRef={provided.innerRef}
                         {...provided.dragHandleProps}
                         style={provided.draggableStyle}
                       >
-                        Inactive Inputs
-                      </h4>
+                        INACTIVE
+                      </StackTitle>
                       {provided.placeholder}
                     </div>}
                 </Draggable>
@@ -189,13 +226,17 @@ export class BroadcastDetail extends Component {
           </Stack>
         </Column> */}
         <Column>
-          <h4>Outputs</h4>
+          <StackTitle>OUTPUTS</StackTitle>
           {this.props.outputs.map(output =>
-            <Stack>
-              <BroadcastStackItem key={output.id}>
-                {output.id}
-              </BroadcastStackItem>
-            </Stack>
+            <Output key={output.id}>
+              <OutputTitle>
+                {output.title}
+              </OutputTitle>
+              <OutputButton
+                active={output.broadcastId === broadcast.id}
+                onClick={() => this.toggleOutput(output)}
+              />
+            </Output>
           )}
         </Column>
       </FlexContainer>

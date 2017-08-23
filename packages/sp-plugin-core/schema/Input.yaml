@@ -20,6 +20,9 @@ properties:
   title:
     type: string
     description: Human-readable input title
+  liveAt:
+    type: number
+    description: When was this input last live?
   streamKey:
     $ref: "SecretKey"
     description: Secret code in the stream URL, i.e. rtmp://rtmp.server.streamplace.example/stream/$streamKey

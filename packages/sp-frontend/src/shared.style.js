@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const activeColor = "#00b8ff";
+export const activeColor = "#00b8ff";
 
 export const FlexContainer = styled.div`
   width: 100%;
