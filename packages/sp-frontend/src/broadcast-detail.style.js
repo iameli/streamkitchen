@@ -1,13 +1,20 @@
 import styled from "styled-components";
 
-export const Column = styled.div`flex-grow: 1;`;
+export const Column = styled.div`
+  flex-basis: 0;
+  flex-grow: 1;
+`;
 
-export const Stack = styled.div`border: 1px dotted #333;`;
+export const Stack = styled.div`
+  flex-grow: 2;
+  flex-basis: 0;
+  background-color: #ccc;
+`;
+
+export const StackDragWrapper = styled.div`padding: 1em;`;
 
 export const StackItem = styled.div`
-  border-bottom: 1px dotted #333;
-  &:last-child {
-    border-bottom: none;
-  }
+  background-color: white;
+  border: 1px solid #333;
   padding: 1em;
 `;

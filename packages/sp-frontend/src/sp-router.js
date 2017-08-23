@@ -55,6 +55,16 @@ export class SPRouter extends Component {
           <Sidebar>
             {this.renderChannelIcon({ slug: "", icon: icon, id: "home" })}
             <ChannelIcon
+              id="channel-inputs"
+              activeClassName="active"
+              key="inputs"
+              to="/streamplace:inputs"
+            >
+              <ChannelIconText>
+                <i className="fa fa-gear" />
+              </ChannelIconText>
+            </ChannelIcon>
+            <ChannelIcon
               id="channel-options"
               activeClassName="active"
               key="options"
