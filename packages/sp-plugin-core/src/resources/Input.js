@@ -6,7 +6,8 @@ export default class Input extends Resource {
     return super.default().then(doc => {
       return {
         ...doc,
-        userId: ctx.user.id
+        userId: ctx.user.id,
+        title: "New Input"
       };
     });
   }
