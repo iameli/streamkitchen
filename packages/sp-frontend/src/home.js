@@ -103,7 +103,6 @@ export class Home extends Component {
               </li>
             )}
           </ul>
-          <h3>New Broadcast</h3>
           {this.renderForm()}
         </div>
       </FlexContainer>

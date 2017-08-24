@@ -4,7 +4,10 @@ import { activeColor } from "./shared.style";
 export const Column = styled.div`
   flex-basis: 0;
   flex-grow: 1;
-  padding: 0 1em;
+  padding: 0 1em 1em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Stack = styled.div`
@@ -32,6 +35,7 @@ export const Output = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5em;
 `;
 
 export const OutputButton = styled.button`
@@ -41,6 +45,7 @@ export const OutputButton = styled.button`
   cursor: pointer;
 
   background-color: ${props => (props.active ? activeColor : "#aaa")};
+  margin-left: 0.2em;
 
   border: 1px solid transparent;
 
@@ -48,22 +53,5 @@ export const OutputButton = styled.button`
   &:active {
     border: 1px solid ${activeColor};
     outline: none;
-  }
-
-  &::before {
-    display: block;
-    content: "OFF";
-    visibility: ${props => (props.active ? "hidden" : "visible")};
-  }
-
-  &::after {
-    position: absolute;
-    width: 100%;
-    top: 2px;
-    left: 0;
-    display: block;
-    text-align: center;
-    visibility: ${props => (props.active ? "visible" : "hidden")};
-    content: "ON";
   }
 `;

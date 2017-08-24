@@ -16,6 +16,7 @@ import {
 } from "./broadcast-detail.style";
 import BroadcastStackItem from "./broadcast-stack-item";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import OutputCreate from "./output-create";
 
 export class BroadcastDetail extends Component {
   static propTypes = {
@@ -125,6 +126,14 @@ export class BroadcastDetail extends Component {
     SP.broadcasts.update(broadcast.id, { active: false });
   }
 
+  deleteOutput(output) {
+    if (!confirm(`Are you sure you want to delete ${output.title}?`)) {
+      return;
+    }
+    const { SP } = this.props;
+    SP.outputs.delete(output.id).catch(SP.log);
+  }
+
   render() {
     if (!this.state.broadcast || !this.props.inputs || !this.props.outputs) {
       return <p>Loading...</p>;
@@ -213,31 +222,33 @@ export class BroadcastDetail extends Component {
               </Stack>}
           </Droppable>
         </DragDropContext>
-        {/* <Column>
-          <h4>Playlist</h4>
-          {this.renderStack()}
-          <h4>Available Inputs</h4>
-          <Stack>
-            {this.props.inputs.map(input =>
-              <BroadcastStackItem key={input.id}>
-                {input.title}
-              </BroadcastStackItem>
-            )}
-          </Stack>
-        </Column> */}
         <Column>
-          <StackTitle>OUTPUTS</StackTitle>
-          {this.props.outputs.map(output =>
-            <Output key={output.id}>
-              <OutputTitle>
-                {output.title}
-              </OutputTitle>
-              <OutputButton
-                active={output.broadcastId === broadcast.id}
-                onClick={() => this.toggleOutput(output)}
-              />
-            </Output>
-          )}
+          <div>
+            <StackTitle>OUTPUTS</StackTitle>
+            {this.props.outputs.map(output =>
+              <Output key={output.id}>
+                <OutputTitle>
+                  {output.title}
+                </OutputTitle>
+                <div>
+                  <OutputButton
+                    active={output.broadcastId === broadcast.id}
+                    onClick={() => this.toggleOutput(output)}
+                  >
+                    {output.broadcastId === broadcast.id ? "ON" : "OFF"}
+                  </OutputButton>
+                  <OutputButton
+                    onClick={() => {
+                      this.deleteOutput(output);
+                    }}
+                  >
+                    <i className="fa fa-times" />
+                  </OutputButton>
+                </div>
+              </Output>
+            )}
+          </div>
+          <OutputCreate />
         </Column>
       </FlexContainer>
     );

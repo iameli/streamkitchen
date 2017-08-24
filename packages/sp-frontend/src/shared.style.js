@@ -14,25 +14,33 @@ export const FlexContainer = styled.div`
 `;
 
 export const NiceForm = styled.form`
-  margin-left: 0.5em;
-  border-left: 2px solid #ccc;
-  padding-left: 0.5em;
+  padding: 1em;
+  background-color: #eee;
 `;
 
-export const NiceLabel = styled.label`color: #222;`;
+export const NiceLabel = styled.label`
+  color: #222;
+  margin-top: 0.5em;
+  display: block;
+`;
+
+export const NiceTitle = styled.h4`margin-top: 0;`;
 
 export const BigInput = styled.input`
   border: none;
-  border-bottom: 2px solid #333;
-  background-color: transparent;
-  font-size: 1.5em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 1.1em;
+  padding: 0.4em;
   display: block;
-  margin: 0.5em 0;
+  margin: 0.3em 0;
   font-weight: 200;
+  width: 100%;
 
   &:focus,
   &:active {
-    border-bottom-color: ${activeColor};
+    border-color: ${activeColor};
     outline: none;
   }
 `;
@@ -40,6 +48,8 @@ export const BigInput = styled.input`
 export const NiceSubmit = styled.button`
   border: none;
   background-color: transparent;
+  font-size: 1.1em;
+  margin-top: 0.5em;
   color: ${activeColor};
   cursor: pointer;
 `;
