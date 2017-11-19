@@ -1,6 +1,7 @@
 pipeline:
   build:
     image: streamplace/wheelhouse
+    pull: true
     commands:
       - npm install
       - npx wheelhouse build
