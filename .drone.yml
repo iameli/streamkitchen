@@ -7,6 +7,8 @@ pipeline:
       - WH_S3_SECRET_ACCESS_KEY
       - WH_S3_URL
       - WH_DOCKER_AUTH
+    environment:
+      - NPM_CONFIG_UNSAFE_PERM=true
     commands:
       - npm install
       - npx wheelhouse install
