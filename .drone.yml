@@ -3,9 +3,9 @@ pipeline:
     image: streamplace/wheelhouse
     pull: true
     environment:
-      - WH_S3_ACCESS_KEY_ID="MINIO"
-      - WH_S3_SECRET_ACCESS_KEY="F7CCDAAD-6289-446B-A143-6DA4C8760DB4"
-      - WH_S3_URL="http://snorlax-minio-svc.default.svc.cluster.local/build"
+      - WH_S3_ACCESS_KEY_ID=MINIO
+      - WH_S3_SECRET_ACCESS_KEY=F7CCDAAD-6289-446B-A143-6DA4C8760DB4
+      - WH_S3_URL=http://snorlax-minio-svc.default.svc.cluster.local/build
     commands:
       - npm install
       - npx wheelhouse build
