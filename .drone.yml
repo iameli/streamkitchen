@@ -5,7 +5,7 @@ pipeline:
     environment:
       - WH_S3_ACCESS_KEY_ID=MINIO
       - WH_S3_SECRET_ACCESS_KEY=F7CCDAAD-6289-446B-A143-6DA4C8760DB4
-      - WH_S3_URL=http://172.16.192.5:9000/build
+      - WH_S3_URL=http://172.16.192.10:9000/build
     commands:
       - npm install
       - npx wheelhouse build
