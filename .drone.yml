@@ -8,8 +8,9 @@ pipeline:
       - WH_S3_URL
       - WH_DOCKER_AUTH
     commands:
-      - echo $WH_S3_URL
       - npm install
       - npx wheelhouse build
       - npx wheelhouse push
       - npx wheelhouse clean
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
