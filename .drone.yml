@@ -2,6 +2,11 @@ pipeline:
   build:
     image: streamplace/wheelhouse
     pull: true
+    environment:
+      - WH_S3_ACCESS_KEY_ID=${WH_S3_ACCESS_KEY_ID}
+      - WH_S3_SECRET_ACCESS_KEY=${WH_SECRET_ACCESS_KEY}
+      - WH_S3_URL=${WH_S3_URL}
+      - WH_DOCKER_AUTH=${WH_DOCKER_AUTH}
     commands:
       - npm install
       - npx wheelhouse build
