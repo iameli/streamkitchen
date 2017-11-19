@@ -9,6 +9,7 @@ pipeline:
       - WH_DOCKER_AUTH
     commands:
       - npm install
+      - npx wheelhouse install
       - npx wheelhouse build
       - npx wheelhouse push
       - npx wheelhouse clean
