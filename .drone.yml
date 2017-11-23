@@ -21,6 +21,5 @@ pipeline:
   slack:
     image: plugins/slack
     secrets:
-      - SLACK_WEBHOOK_URL
-    webhook: ${SLACK_WEBHOOK_URL}
+      - slack_webhook
     channel: occurences
