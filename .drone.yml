@@ -17,3 +17,9 @@ pipeline:
       - npx wheelhouse clean
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+notify:
+  slack:
+    webhook_url: $$SLACK_WEBHOOK_URL
+    channel: happenings
+    username: drone
